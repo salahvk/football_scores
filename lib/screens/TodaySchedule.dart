@@ -1,54 +1,69 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:football_scores/components/color_manager.dart';
+import 'package:football_scores/components/styles_manager.dart';
+import 'package:football_scores/provider/Data_Provider.dart';
+import 'package:football_scores/widgets/date_slider.dart';
+import 'package:football_scores/widgets/league_slider.dart';
+import 'package:provider/provider.dart';
 
-class TodaySchedulePage extends StatelessWidget {
+class TodaySchedulePage extends StatefulWidget {
   const TodaySchedulePage({Key? key}) : super(key: key);
 
   @override
+  State<TodaySchedulePage> createState() => _TodaySchedulePageState();
+}
+
+class _TodaySchedulePageState extends State<TodaySchedulePage> {
+  @override
+  void initState() {
+    super.initState();
+    // getSchedule(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<DataProvider>(context, listen: true);
+    // final size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 10, 0, 25),
-              child: CarouselSlider.builder(
-                itemCount: 15,
-                itemBuilder:
-                    (BuildContext context, int itemIndex, int pageViewIndex) =>
-                        Container(
-                  decoration: BoxDecoration(
-                      color: ColorManager.whiteColor,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 10,
-                ),
-                options: CarouselOptions(
-                  autoPlay: false,
-                  height: 30,
-                  enlargeCenterPage: true,
-                  viewportFraction: 0.4,
-                  aspectRatio: 2.0,
-                  initialPage: 2,
-                ),
-              ),
-            ),
-            CarouselSlider.builder(
-              itemCount: 15,
-              itemBuilder:
-                  (BuildContext context, int itemIndex, int pageViewIndex) =>
-                      Container(
-                color: ColorManager.errorRed,
-                height: 50,
-              ),
-              options: CarouselOptions(
-                autoPlay: false,
-                enlargeCenterPage: true,
-                viewportFraction: 0.7,
-                aspectRatio: 2.0,
-                initialPage: 2,
+            const TodaySlider(),
+            const LeagueSlider(),
+            SizedBox(
+              // height: size.height * .85,
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (ctx, index) {
+                  final teams = provider.scheduleModel?.response![index].teams;
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: ColorManager.whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: ListTile(
+                            leading: Text(
+                              teams?.home?.name ?? '',
+                              style: getRegularStyle(
+                                  color: ColorManager.background),
+                            ),
+                            trailing: Text(
+                              teams?.away?.name ?? '',
+                              style: getRegularStyle(
+                                  color: ColorManager.background),
+                            ),
+                          ),
+                        )),
+                  );
+                },
+                itemCount: provider.scheduleModel!.results,
               ),
             )
           ],
