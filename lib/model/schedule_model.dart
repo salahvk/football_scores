@@ -1,9 +1,22 @@
-class ScheduleModel {
+import 'package:hive/hive.dart';
+part 'schedule_model.g.dart';
+
+@HiveType(typeId: 0)
+class ScheduleModel extends HiveObject {
+  @HiveField(1)
   String? get;
+
+  @HiveField(2)
   Parameters? parameters;
   // List<Strin>? errors;
+
+  @HiveField(3)
   int? results;
+
+  @HiveField(4)
   Paging? paging;
+
+  @HiveField(5)
   List<Response>? response;
 
   ScheduleModel(
@@ -55,6 +68,7 @@ class ScheduleModel {
   }
 }
 
+@HiveType(typeId: 1)
 class Parameters {
   String? date;
   String? league;
@@ -77,6 +91,7 @@ class Parameters {
   }
 }
 
+@HiveType(typeId: 2)
 class Paging {
   int? current;
   int? total;
@@ -96,7 +111,9 @@ class Paging {
   }
 }
 
+@HiveType(typeId: 3)
 class Response {
+  @HiveField(1)
   Fixture? fixture;
   League? league;
   Teams? teams;
@@ -135,6 +152,7 @@ class Response {
   }
 }
 
+@HiveType(typeId: 4)
 class Fixture {
   int? id;
   String? referee;
@@ -187,6 +205,7 @@ class Fixture {
   }
 }
 
+@HiveType(typeId: 5)
 class Periods {
   int? first;
   int? second;
@@ -206,6 +225,7 @@ class Periods {
   }
 }
 
+@HiveType(typeId: 6)
 class Venue {
   int? id;
   String? name;
@@ -228,6 +248,7 @@ class Venue {
   }
 }
 
+@HiveType(typeId: 7)
 class Status {
   String? long;
   String? short;
@@ -250,6 +271,7 @@ class Status {
   }
 }
 
+@HiveType(typeId: 8)
 class League {
   int? id;
   String? name;
@@ -291,8 +313,11 @@ class League {
   }
 }
 
+@HiveType(typeId: 9)
 class Teams {
+  @HiveField(1)
   Home? home;
+  @HiveField(2)
   Home? away;
 
   Teams({this.home, this.away});
@@ -314,10 +339,13 @@ class Teams {
   }
 }
 
+@HiveType(typeId: 10)
 class Home {
   int? id;
+  @HiveField(1)
   String? name;
   String? logo;
+  @HiveField(2)
   bool? winner;
 
   Home({this.id, this.name, this.logo, this.winner});
@@ -339,6 +367,7 @@ class Home {
   }
 }
 
+@HiveType(typeId: 11)
 class Goals {
   int? home;
   int? away;
@@ -358,6 +387,7 @@ class Goals {
   }
 }
 
+@HiveType(typeId: 12)
 class Score {
   Goals? halftime;
   Goals? fulltime;
@@ -396,6 +426,7 @@ class Score {
   }
 }
 
+@HiveType(typeId: 13)
 class Extratime {
   String? home;
   String? away;

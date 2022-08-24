@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_scores/Api/get_schedule.dart';
 import 'package:football_scores/components/color_manager.dart';
 import 'package:football_scores/components/styles_manager.dart';
 import 'package:football_scores/provider/Data_Provider.dart';
@@ -17,7 +18,8 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
   @override
   void initState() {
     super.initState();
-    // getSchedule(context);
+    print('object');
+    getSchedule(context, DateTime.now().toString().substring(0, 10));
   }
 
   @override
@@ -63,7 +65,7 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
                         )),
                   );
                 },
-                itemCount: provider.scheduleModel!.results,
+                itemCount: provider.scheduleModel?.results ?? 0,
               ),
             )
           ],

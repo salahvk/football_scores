@@ -1,0 +1,6 @@
+ var box = Hive.box(date);
+    var open = Hive.openBox(date);
+
+    var box = Hive. box(date);
+    await Hive.openBox(date);
+    var name = date.get('name');
