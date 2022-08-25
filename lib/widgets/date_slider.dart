@@ -8,10 +8,23 @@ import 'package:football_scores/utils/date_list.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
-class TodaySlider extends StatelessWidget {
+class TodaySlider extends StatefulWidget {
   const TodaySlider({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<TodaySlider> createState() => _TodaySliderState();
+}
+
+class _TodaySliderState extends State<TodaySlider> {
+  int? s;
+
+  @override
+  void initState() {
+    super.initState();
+    s = 30;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +34,20 @@ class TodaySlider extends StatelessWidget {
         itemCount: 60,
         itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
           var newDt = DateFormat.MMMEd().format(getDates()[itemIndex]);
-          return InkWell(
-            onTap: () {},
-            child: Container(
-              decoration: BoxDecoration(
-                color: ColorManager.whiteColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              height: 15,
-              width: 150,
-              child: Center(
-                child: Text(
-                  newDt,
-                  style: getMediumtStyle(color: ColorManager.darkBackground),
-                ),
+
+          return Container(
+            decoration: BoxDecoration(
+              color: ColorManager.whiteColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            height: 15,
+            width: 150,
+            child: Center(
+              child: Text(
+                newDt,
+                style: s == itemIndex
+                    ? getBoldtStyle(color: ColorManager.darkBackground)
+                    : getMediumtStyle(color: ColorManager.grayLight),
               ),
             ),
           );
@@ -44,6 +57,10 @@ class TodaySlider extends StatelessWidget {
           height: 30,
           onPageChanged: (index, reason) {
             onPageChangedFunction(index, context);
+
+            setState(() {
+              s = index;
+            });
           },
           enlargeCenterPage: true,
           viewportFraction: 0.3,

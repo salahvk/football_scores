@@ -12,16 +12,21 @@ class LeagueBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      color: ColorManager.errorRed,
-      height: size.height * .09,
-      child: Image.asset(
-        index == 0
-            ? ImageAssets.laliga
-            : index == 1
-                ? ImageAssets.premierLeague
-                : ImageAssets.serieA,
-        fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        decoration: const BoxDecoration(
+          color: ColorManager.errorRed,
+        ),
+        height: size.height * .09,
+        child: Image.asset(
+          index == 0
+              ? ImageAssets.laliga
+              : index == 1
+                  ? ImageAssets.premierLeague
+                  : ImageAssets.serieA,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
