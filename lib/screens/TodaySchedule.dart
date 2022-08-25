@@ -15,11 +15,11 @@ class TodaySchedulePage extends StatefulWidget {
 }
 
 class _TodaySchedulePageState extends State<TodaySchedulePage> {
+  final date = DateTime.now().toString().substring(0, 10);
   @override
   void initState() {
     super.initState();
-    print('object');
-    getSchedule(context, DateTime.now().toString().substring(0, 10));
+    getSchedule(context, date);
   }
 
   @override

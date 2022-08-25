@@ -5,6 +5,7 @@ import 'package:football_scores/Api/get_schedule.dart';
 import 'package:football_scores/components/color_manager.dart';
 import 'package:football_scores/components/styles_manager.dart';
 import 'package:football_scores/utils/date_list.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 class TodaySlider extends StatelessWidget {
@@ -42,8 +43,7 @@ class TodaySlider extends StatelessWidget {
           autoPlay: false,
           height: 30,
           onPageChanged: (index, reason) {
-            final date = getDates()[index].toString().substring(0, 10);
-            getSchedule(context, date);
+            onPageChangedFunction(index, context);
           },
           enlargeCenterPage: true,
           viewportFraction: 0.3,
@@ -52,5 +52,11 @@ class TodaySlider extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  onPageChangedFunction(index, context) {
+    final date = getDates()[index].toString().substring(0, 10);
+    Hive.close();
+    getSchedule(context, date);
   }
 }

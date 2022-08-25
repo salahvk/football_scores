@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:football_scores/Api/api_key.dart';
 import 'package:football_scores/Api/endpoint.dart';
 import 'package:football_scores/Api/error_handling.dart';
@@ -14,13 +14,9 @@ import 'package:http/http.dart' as http;
 getSchedule(BuildContext context, date) async {
   try {
     final provider = Provider.of<DataProvider>(context, listen: false);
-
     final isExist = await Hive.boxExists(date);
-    // print(isExist);
-    // await Hive.deleteBoxFromDisk(date);
-    // return;
 
-    if (isExist == false) {
+    if (!isExist) {
       print("Request gone");
       var response = await http.get(
           Uri.parse("$endPoint/fixtures?date=$date&league=39&season=2022"),
@@ -29,21 +25,16 @@ getSchedule(BuildContext context, date) async {
       errorHandling(response, context);
       var jsonResponse = jsonDecode(response.body);
       var scheduleModel = ScheduleModel.fromJson(jsonResponse);
-      // print(jsonResponse);
-      print("First response");
       provider.scheduleModelData = scheduleModel;
-      await Hive.openBox(date);
-      var box = Hive.box(date);
-      box.add(jsonResponse);
-      print("boxadded");
+      var box = await Hive.openBox(date);
+      box.add(response.body);
     } else {
       print("Box exists");
       await Hive.openBox(date);
       var box = Hive.box(date);
-      final data = box.values;
-      // print(box.values.first);
-      print("Second response");
-      var scheduleModel = ScheduleModel.fromJson(box.values.first);
+      final boxData = box.values.first;
+      var jsonResponse = jsonDecode(boxData);
+      var scheduleModel = ScheduleModel.fromJson(jsonResponse);
       provider.scheduleModelData = scheduleModel;
     }
   } on Exception catch (_) {

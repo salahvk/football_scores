@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:football_scores/components/assets_manager.dart';
+import 'package:football_scores/components/color_manager.dart';
 import 'package:football_scores/components/routes_manager.dart';
 
 class Splash extends StatefulWidget {
@@ -23,6 +24,7 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: ColorManager.whiteColor,
       body: Stack(
         children: [
           SizedBox(
@@ -34,12 +36,6 @@ class _SplashState extends State<Splash> {
               child: Image.asset(ImageAssets.logo),
             ),
           ),
-          // loading
-          //     ? Positioned(
-          //         bottom: 15,
-          //         left: size.width * 0.45,
-          //         child: const CircularProgressIndicator())
-          //     : Container()
         ],
       ),
     );

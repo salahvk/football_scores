@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_scores/components/routes_manager.dart';
 import 'package:football_scores/components/theme_manager.dart';
-import 'package:football_scores/model/schedule_model.dart';
 import 'package:football_scores/provider/Data_Provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +10,7 @@ void main() async {
   // Directory? dir = await getExternalStorageDirectory();
   // Hive.init(dir?.path);
   await Hive.initFlutter();
-  Hive.registerAdapter(ScheduleModelAdapter());
+  // Hive.registerAdapter(ScheduleModelAdapter());
   runApp(const MyApp());
 }
 
