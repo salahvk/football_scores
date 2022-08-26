@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:football_scores/Api/get_schedule.dart';
 import 'package:football_scores/components/color_manager.dart';
 import 'package:football_scores/components/styles_manager.dart';
+import 'package:football_scores/provider/local_provider.dart';
 import 'package:football_scores/utils/date_list.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class TodaySlider extends StatefulWidget {
   const TodaySlider({
@@ -74,6 +76,7 @@ class _TodaySliderState extends State<TodaySlider> {
   onPageChangedFunction(index, context) {
     final date = getDates()[index].toString().substring(0, 10);
     Hive.close();
-    getSchedule(context, date);
+    final provider = Provider.of<LocalProvider>(context, listen: false);
+    getSchedule(context, date, provider.leagueIndex);
   }
 }

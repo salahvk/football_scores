@@ -19,7 +19,7 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
   @override
   void initState() {
     super.initState();
-    getSchedule(context, date);
+    getSchedule(context, date, 1);
   }
 
   @override
