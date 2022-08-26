@@ -23,7 +23,6 @@ getSchedule(BuildContext context, date, leagueIndex) async {
     lProvider.sliderDateData(date);
 
     if (!isExist) {
-      print("Request gone");
       var response = await http.get(
           Uri.parse("$endPoint/fixtures?date=$date&league=$league&season=2022"),
           headers: {"x-apisports-key": apiKey1});
@@ -37,7 +36,7 @@ getSchedule(BuildContext context, date, leagueIndex) async {
     } else {
       print("Box exists");
       var box = await Hive.openBox(boxName);
-      // var box = Hive.box(date);
+
       final boxData = box.values.first;
       var jsonResponse = jsonDecode(boxData);
       var scheduleModel = ScheduleModel.fromJson(jsonResponse);

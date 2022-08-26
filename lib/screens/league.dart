@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:football_scores/Api/get_standings.dart';
 import 'package:football_scores/components/color_manager.dart';
 import 'package:football_scores/components/styles_manager.dart';
 import 'package:football_scores/screens/point_Table.dart';
@@ -15,13 +14,10 @@ class Matches extends StatelessWidget {
             child: ListView.builder(
       itemBuilder: (context, index) {
         return InkWell(
-          onTap: () async {
+          onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (ctx) {
               return const PointTable();
             }));
-            await getStandings(
-              context,
-            );
           },
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 20, 8, 0),
