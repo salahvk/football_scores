@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:football_scores/components/color_manager.dart';
 import 'package:football_scores/screens/TodaySchedule.dart';
-import 'package:football_scores/screens/matches.dart';
+import 'package:football_scores/screens/league.dart';
 import 'package:football_scores/screens/players.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             ),
             GButton(
               icon: Icons.search,
-              text: 'Search',
+              text: 'Leagues',
             ),
             GButton(
               icon: Icons.music_note_sharp,
