@@ -46,7 +46,7 @@ class _TodaySliderState extends State<TodaySlider> {
             width: 150,
             child: Center(
               child: Text(
-                newDt,
+                itemIndex == 30 ? 'Today' : newDt,
                 style: s == itemIndex
                     ? getBoldtStyle(color: ColorManager.darkBackground)
                     : getMediumtStyle(color: ColorManager.grayLight),

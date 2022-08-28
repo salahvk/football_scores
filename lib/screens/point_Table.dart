@@ -8,8 +8,8 @@ import 'package:football_scores/widgets/table_titles.dart';
 import 'package:provider/provider.dart';
 
 class PointTable extends StatefulWidget {
-  const PointTable({Key? key}) : super(key: key);
-
+  const PointTable({Key? key, required this.leagueIndex}) : super(key: key);
+  final int leagueIndex;
   @override
   State<PointTable> createState() => _PointTableState();
 }
@@ -19,7 +19,7 @@ class _PointTableState extends State<PointTable> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      getStandings(context, 1);
+      getStandings(context, widget.leagueIndex);
     });
   }
 
@@ -139,7 +139,9 @@ class _PointTableState extends State<PointTable> {
                       )),
                 );
               },
-              itemCount: 20,
+              itemCount: provider.pointTableModel?.response![0].league
+                      ?.standings![0].length ??
+                  0,
             ),
           ],
         ),

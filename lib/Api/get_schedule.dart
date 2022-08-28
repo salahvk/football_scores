@@ -23,6 +23,7 @@ getSchedule(BuildContext context, date, leagueIndex) async {
     lProvider.sliderDateData(date);
 
     if (!isExist) {
+      print("Request gone");
       var response = await http.get(
           Uri.parse("$endPoint/fixtures?date=$date&league=$league&season=2022"),
           headers: {"x-apisports-key": apiKey1});

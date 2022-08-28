@@ -24,7 +24,7 @@ getStandings(BuildContext context, leagueIndex) async {
       print("Request gone");
       var response = await http.get(
           Uri.parse(
-            "$endPoint/standings?league=39&season=2022",
+            "$endPoint/standings?league=$league&season=2022",
           ),
           headers: {"x-apisports-key": apiKey1});
       // ignore: use_build_context_synchronously

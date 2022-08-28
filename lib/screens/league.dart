@@ -16,7 +16,9 @@ class Matches extends StatelessWidget {
         return InkWell(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-              return const PointTable();
+              return PointTable(
+                leagueIndex: index,
+              );
             }));
           },
           child: Padding(
@@ -31,7 +33,6 @@ class Matches extends StatelessWidget {
                       height: 50,
                       width: 50,
                       decoration: BoxDecoration(
-                        // color: ColorManager.grayLight,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: CircleAvatar(

@@ -12,5 +12,6 @@ List<DateTime> getDates() {
 
     list.add(thirtyDaysAfter);
   }
+
   return list;
 }
