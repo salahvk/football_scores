@@ -2,7 +2,8 @@
     package="com.example.football_scores">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="football_scores"
+   
+        android:label="Football Scores"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
